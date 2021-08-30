@@ -3,7 +3,7 @@ import argparse
 import requests
 from urllib.parse import urlparse
 from dotenv import load_dotenv
-load_dotenv()
+
 
 HOST = "https://api-ssl.bitly.com/v4/{}"
 
@@ -34,6 +34,9 @@ def is_bitlink(url, secret_token):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Сокращение ссылок и подсчет кликов Bitly.")
+    parser.add_argument("links", nargs="+", help="Ссылки для сокращения или подсчета. На вход принимается несколько параметров.")
+    args = parser.parse_args()
     for link in args.links:
         secret_token = os.getenv("BITLY_TOKEN")
         url = urlparse(link)
@@ -44,11 +47,9 @@ def main():
             else:
                 print("Битлинк: ", shorten_link(url.geturl(), secret_token))
         except requests.exceptions.HTTPError:
-            print("Введена некорректная ссылка")
+            print("Введена некорректная ссылка.")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Сокращение ссылок и подсчет кликов Bitly")
-    parser.add_argument("links", nargs='+', help="Ссылка для сокращения")
-    args = parser.parse_args()
+    load_dotenv()
     main()
