@@ -12,19 +12,12 @@ Python3 должен быть уже установлен.
 ```
 pip install -r requirements.txt
 ```
-### Необходимые библиотеки для работы программы:
-```
-import os
-import argparse
-import requests
-from urllib.parse import urlparse
-from dotenv import load_dotenv
-```
+
 ### Пример работы программы 
 Параметры запуска:
 
 ```
-https://www.youtube.com https://bit.ly/2Wfgrzy
+python API-SERVISES https://www.youtube.com https://bit.ly/2Wfgrzy
 ```
 Вывод:
 ```

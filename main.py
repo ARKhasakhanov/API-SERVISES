@@ -34,11 +34,12 @@ def is_bitlink(url, secret_token):
 
 
 def main():
+    load_dotenv()
+    secret_token = os.getenv("BITLY_TOKEN")
     parser = argparse.ArgumentParser(description="Сокращение ссылок и подсчет кликов Bitly.")
-    parser.add_argument("links", nargs="+", help="Ссылки для сокращения или подсчета. На вход принимается несколько параметров.")
+    parser.add_argument("links", nargs="+", help="Ссылки для сокращения или подсчета, принимает несколько параметров")
     args = parser.parse_args()
     for link in args.links:
-        secret_token = os.getenv("BITLY_TOKEN")
         url = urlparse(link)
         netloc_and_path = "{}{}".format(url.netloc, url.path)
         try:
@@ -51,5 +52,4 @@ def main():
 
 
 if __name__ == "__main__":
-    load_dotenv()
     main()
